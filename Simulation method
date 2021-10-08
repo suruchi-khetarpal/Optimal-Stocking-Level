@@ -1,0 +1,20 @@
+def inventoryCost(level,demandList,underage,overage):
+    total=0
+    for demand in demandList:
+        if demand>level:
+            cost=underage*(demand-level)
+        else:
+            cost=overage*(level-demand)
+        total+=cost
+    return total/len(demandList)
+
+def optBaseStock(levelList,demandList,underage,overage):
+    bestCost=1e100  # effectively infinity
+    bestLevel=1e100
+    avCost={}
+    for level in levelList:
+        avCost[level]=inventoryCost(level,demandList,underage,overage)
+        if avCost[level]<bestCost or (avCost[level]==bestCost and level<bestLevel):
+            bestCost=avCost[level]
+            bestLevel=level
+    return bestLevel,avCost
