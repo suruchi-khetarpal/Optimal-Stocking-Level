@@ -1,0 +1,27 @@
+# Sample run 1
+demandList=[10,18,5,20,16,30,15,3,5,10]
+levelList=range(0,30,5)
+underage=10
+overage=3
+bestLevel,avCost=optBaseStock(levelList,demandList,underage,overage)
+print('bestLevel:',bestLevel)
+print('avCost:',avCost)
+
+
+#Sample run 2
+demandList=[10,18,5,20,16,30,15,3,5,10]
+levelList=range(0,30,5)
+underage=10
+overage=3
+bestLevel,cost=optBaseStock(levelList,demandList,underage,overage)
+
+import matplotlib.pyplot as plt
+levelList=sorted(levelList)
+costList=[cost[level] for level in levelList]
+plt.plot(levelList,costList)
+plt.plot([bestLevel],[cost[bestLevel]],'ro')
+plt.title(f'Optimal stocking level is {bestLevel} with cost {round(cost[bestLevel],2)}')
+plt.xlabel('Stocking level')
+plt.ylabel('Average inventory cost')
+plt.ylim(bottom=0)
+plt.show()
